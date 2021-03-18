@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".Activity_Contacts">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -14,14 +14,14 @@
         android:orientation="vertical">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/main_BTN_contacts"
+            android:id="@+id/main_BTN_permission"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             app:strokeColor="@color/purple_500"
             app:cornerRadius="50dp"
             android:layout_gravity="center"
-            android:text="Contacts"
+            android:text="Permission"
             app:icon="@drawable/ic_contacts"
             app:iconSize="14dp"
 

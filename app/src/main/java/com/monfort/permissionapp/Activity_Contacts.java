@@ -7,18 +7,13 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.VibrationEffect;
-import android.os.Vibrator;
 import android.provider.ContactsContract;
 import android.provider.Settings;
 import android.util.Log;
@@ -28,9 +23,9 @@ import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
 
-public class MainActivity extends AppCompatActivity {
+public class Activity_Contacts extends AppCompatActivity {
 
-    private MaterialButton main_BTN_contacts;
+    private MaterialButton main_BTN_permission;
     private TextView main_LBL_info;
 
     @Override
@@ -38,10 +33,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        main_BTN_contacts = findViewById(R.id.main_BTN_contacts);
+        main_BTN_permission = findViewById(R.id.main_BTN_permission);
         main_LBL_info = findViewById(R.id.main_LBL_info);
 
-        main_BTN_contacts.setOnClickListener(new View.OnClickListener() {
+        main_BTN_permission.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getContacts();
@@ -92,15 +87,16 @@ public class MainActivity extends AppCompatActivity {
     private static final int MANUALLY_CONTACTS_PERMISSION_REQUEST_CODE = 124;
 
     private void requestPermission() {
-        ActivityCompat.requestPermissions(MainActivity.this,
+        ActivityCompat.requestPermissions(Activity_Contacts.this,
                 new String[]{Manifest.permission.READ_CONTACTS},
                 PERMISSION_CONTACTS_REQUEST_CODE);
     }
 
     private void requestPermissionWithRationaleCheck() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.READ_CONTACTS)) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(Activity_Contacts.this, Manifest.permission.READ_CONTACTS)) {
             Log.d("pttt", "shouldShowRequestPermissionRationale = true");
-            ActivityCompat.requestPermissions(MainActivity.this,
+            // Show user description for what we need the permission
+            ActivityCompat.requestPermissions(Activity_Contacts.this,
                     new String[]{Manifest.permission.READ_CONTACTS},
                     PERMISSION_CONTACTS_REQUEST_CODE);
         } else {
@@ -112,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
     private void openPermissionSettingDialog() {
         String message = "Setting screen if user have permanently disable the permission by clicking Don't ask again checkbox.";
         AlertDialog alertDialog =
-                new AlertDialog.Builder(MainActivity.this)
+                new AlertDialog.Builder(Activity_Contacts.this)
                         .setMessage(message)
                         .setPositiveButton(getString(android.R.string.ok),
                                 new DialogInterface.OnClickListener() {
@@ -148,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
                     getContacts();
                 } else {
                     requestPermissionWithRationaleCheck();
-                    Toast.makeText(MainActivity.this, "Permission denied to read your External storage", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Activity_Contacts.this, "Permission denied to read your External storage", Toast.LENGTH_SHORT).show();
                 }
                 return;
             }
@@ -165,3 +161,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 }
+
+//Regular - Interner, Vibrate
+//Run Time (Privacy) - Contacts,
+//Background - Location, Camera, Microphone
